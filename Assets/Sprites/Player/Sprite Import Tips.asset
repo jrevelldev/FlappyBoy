@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c455004497e720446a35333a37068883, type: 3}
+  m_Name: Sprite Import Tips
+  m_EditorClassIdentifier: 
+  note: "For every pixel art sprite:\r\n1. Select the sprite in the Project window.\r\n2.
+    In the Inspector, set:\r\n- \u2705 Texture Type: Sprite (2D and UI)\r\n- \u2705
+    Pixels Per Unit (PPU): 16 or 32 (match your game scale)\r\n- \u2705 Filter Mode:
+    Point (no filter) \r\n- \u2705 Compression: None\r\n\r\nRepeat for every sprite
+    sheet, background, icon, etc.\r\n\r\n\U0001F4CC Click Apply after each change."
