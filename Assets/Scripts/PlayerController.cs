@@ -27,13 +27,21 @@ public class PlayerController : MonoBehaviour
     {
         if (isDead) return;
 
-        if (!hasStarted)
+        if (GameManager.Instance.CurrentState == GameManager.GameState.Idle)
         {
             IdleAnimation();
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                hasStarted = true;
+                GameManager.Instance.StartGame();
                 rb.simulated = true;
+                Flap();
+            }
+        }
+        else if (GameManager.Instance.CurrentState == GameManager.GameState.Playing)
+        {
+            FlapAnimation();
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
                 Flap();
             }
         }
@@ -56,8 +64,7 @@ public class PlayerController : MonoBehaviour
             isDead = true;
             rb.linearVelocity = Vector2.zero;
             rb.simulated = false;
-            Debug.Log("You Died!");
-            // Later: call GameManager.Instance.GameOver();
+            GameManager.Instance.GameOver();
         }
     }
 
