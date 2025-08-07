@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private int currentFrame = 0;
     private float animTimer = 0f;
     private bool isFlapping = false;
+    private bool isDead = false;
 
     void Start()
     {
@@ -24,6 +25,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (isDead) return;
+
         if (!hasStarted)
         {
             IdleAnimation();
@@ -41,6 +44,20 @@ public class PlayerController : MonoBehaviour
             {
                 Flap();
             }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Collided with: " + collision.gameObject.name);
+
+        if (!isDead)
+        {
+            isDead = true;
+            rb.linearVelocity = Vector2.zero;
+            rb.simulated = false;
+            Debug.Log("You Died!");
+            // Later: call GameManager.Instance.GameOver();
         }
     }
 
