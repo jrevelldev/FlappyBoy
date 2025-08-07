@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         if (GameManager.Instance.CurrentState == GameManager.GameState.Idle)
         {
             IdleAnimation();
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (JumpPressed())
             {
                 GameManager.Instance.StartGame();
                 rb.simulated = true;
@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
         else if (GameManager.Instance.CurrentState == GameManager.GameState.Playing)
         {
             FlapAnimation();
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (JumpPressed())
             {
                 Flap();
             }
@@ -48,11 +48,17 @@ public class PlayerController : MonoBehaviour
         else
         {
             FlapAnimation();
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (JumpPressed())
             {
                 Flap();
             }
         }
+    }
+
+    bool JumpPressed()
+    {
+        // Works for both desktop and mobile
+        return Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

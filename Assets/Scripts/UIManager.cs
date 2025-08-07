@@ -14,6 +14,10 @@ public class UIManager : MonoBehaviour
     private int score = 0;
     private int highScore = 0;
 
+    private float deathTime = -1f;
+    private float restartDelay = 2f; // seconds to wait before allowing restart
+
+
     void Awake()
     {
         if (Instance == null)
@@ -65,23 +69,28 @@ public class UIManager : MonoBehaviour
                 break;
             case GameManager.GameState.Dead:
                 messageText.text = uiTextData.deadMessage;
+
+                // Record the time of death
+                if (deathTime < 0f)
+                    deathTime = Time.time;
                 break;
         }
 
-        if (GameManager.Instance.CurrentState == GameManager.GameState.Dead && Input.GetKeyDown(KeyCode.R))
+        // Handle restart after delay
+        if (GameManager.Instance.CurrentState == GameManager.GameState.Dead)
         {
-            GameManager.Instance.ResetGame();
-        }
+            // Wait a couple seconds after death
+            if (deathTime < 0f)
+                deathTime = Time.time;
 
-        if (GameManager.Instance.CurrentState == GameManager.GameState.Playing && Input.GetKeyDown(KeyCode.S))
-        {
-            AddScore(1);
-        }
+            bool restartInput = Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0;
 
-        if (GameManager.Instance.CurrentState == GameManager.GameState.Dead && Input.GetKeyDown(KeyCode.R))
-        {
-            ResetScore();
-            GameManager.Instance.ResetGame();
+            if (restartInput && Time.time >= deathTime + restartDelay)
+            {
+                ResetScore();
+                GameManager.Instance.ResetGame();
+                deathTime = -1f;
+            }
         }
 
     }
