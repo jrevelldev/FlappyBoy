@@ -63,14 +63,22 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collided with: " + collision.gameObject.name);
-
         if (!isDead)
         {
             isDead = true;
+
+            // Freeze the player's physics so they stop moving independently
             rb.linearVelocity = Vector2.zero;
             rb.simulated = false;
+
+            // Stick to the obstacle
+            transform.SetParent(collision.transform);
+            transform.localPosition = transform.localPosition; // preserve world position
+
+            // Notify GameManager
             GameManager.Instance.GameOver();
+
+            Debug.Log("You Died!");
         }
     }
 
