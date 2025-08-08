@@ -1265,7 +1265,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press SPACE to Start
+  m_text: Tap or Press SPACE to Start
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4fc7546765b588244be7511b7d33383c, type: 2}
   m_sharedMaterial: {fileID: -4266112779167249813, guid: 4fc7546765b588244be7511b7d33383c, type: 2}

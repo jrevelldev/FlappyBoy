@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 160f6ab67f4df2046a52e48363648cfb, type: 3}
   m_Name: UITextData
   m_EditorClassIdentifier: 
-  startMessage: Press SPACE to Start
+  startMessage: Tap or Press SPACE to Start
   deadMessage: 'You Died!
 
-    Press R to Restart'
+    Tap or Press SPACE to Restart'
