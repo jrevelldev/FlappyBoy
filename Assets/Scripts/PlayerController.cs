@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
-    private bool hasStarted = false;
+    //private bool hasStarted = false;
     private int currentFrame = 0;
     private float animTimer = 0f;
     private bool isFlapping = false;
