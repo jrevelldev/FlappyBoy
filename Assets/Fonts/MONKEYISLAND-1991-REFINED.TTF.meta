@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c646a78161823464484c2ed6119f21c1
+guid: f858baf61a6e87b4e839e115b2900b3a
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -10,9 +10,10 @@ TrueTypeFontImporter:
   includeFontData: 1
   fontNames:
   - Monkey Island 1991 refined
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: c646a78161823464484c2ed6119f21c1, type: 3}
   customCharacters: 
-  fontRenderingMode: 0
+  fontRenderingMode: 2
   ascentCalculationMode: 1
   useLegacyBoundsCalculation: 0
   shouldRoundAdvanceValue: 1
