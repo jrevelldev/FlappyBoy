@@ -88,6 +88,8 @@ public class PlayerController : MonoBehaviour
         isFlapping = true;
         animTimer = 0f;
         currentFrame = 0;
+
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.sfxJump);
     }
 
     void IdleAnimation()

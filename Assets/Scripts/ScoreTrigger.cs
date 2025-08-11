@@ -13,6 +13,7 @@ public class ScoreTrigger : MonoBehaviour
         {
             hasScored = true;
             UIManager.Instance.AddScore(scoreValue); // Use the custom value
+            AudioManager.Instance.PlaySFX(AudioManager.Instance.sfxScore);
         }
     }
 }
