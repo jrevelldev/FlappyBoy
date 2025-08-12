@@ -45,20 +45,24 @@ public class PlayerController : MonoBehaviour
                 Flap();
             }
         }
-        else
-        {
-            FlapAnimation();
-            if (JumpPressed())
-            {
-                Flap();
-            }
-        }
     }
 
     bool JumpPressed()
     {
-        // Works for both desktop and mobile
-        return Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0;
+        // Desktop keyboard
+        if (Input.GetKeyDown(KeyCode.Space)) return true;
+
+        // Desktop web / mobile tap (mouse click)
+        if (Input.GetMouseButtonDown(0)) return true;
+
+        // Mobile touch: only when the finger first touches the screen
+        if (Input.touchCount > 0)
+        {
+            var t = Input.GetTouch(0);
+            if (t.phase == TouchPhase.Began) return true;
+        }
+
+        return false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

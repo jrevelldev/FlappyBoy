@@ -17,6 +17,13 @@ public class UIManager : MonoBehaviour
     private float deathTime = -1f;
     private float restartDelay = 2f; // seconds to wait before allowing restart
 
+    bool RestartPressed()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)) return true;      // desktop
+        if (Input.GetMouseButtonDown(0)) return true;          // desktop web tap/click
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began) return true; // mobile
+        return false;
+    }
 
     void Awake()
     {
@@ -63,13 +70,15 @@ public class UIManager : MonoBehaviour
         {
             case GameManager.GameState.Idle:
                 messageText.text = uiTextData.startMessage;
+                deathTime = -1f;  // reset the death timer if returning to idle (safety)
                 break;
+
             case GameManager.GameState.Playing:
                 messageText.text = "";
                 break;
+
             case GameManager.GameState.Dead:
                 messageText.text = uiTextData.deadMessage;
-
                 // Record the time of death
                 if (deathTime < 0f)
                     deathTime = Time.time;
@@ -79,17 +88,11 @@ public class UIManager : MonoBehaviour
         // Handle restart after delay
         if (GameManager.Instance.CurrentState == GameManager.GameState.Dead)
         {
-            // Wait a couple seconds after death
-            if (deathTime < 0f)
-                deathTime = Time.time;
-
-            bool restartInput = Input.GetKeyDown(KeyCode.Space) || Input.touchCount > 0;
-
-            if (restartInput && Time.time >= deathTime + restartDelay)
+            if (RestartPressed() && Time.time >= deathTime + restartDelay)
             {
                 ResetScore();
                 GameManager.Instance.ResetGame();
-                deathTime = -1f;
+                deathTime = -1f; // ready for next cycle
             }
         }
 
