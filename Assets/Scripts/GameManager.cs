@@ -21,12 +21,20 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
     }
 
+    void Start()
+    {
+        // Ensure idle music plays at start (loop on)
+        AudioManager.Instance.PlayMusic(AudioManager.Instance.musicIdle, loop: true);
+    }
+
     public void StartGame()
     {
         if (CurrentState != GameState.Idle) return;
 
         CurrentState = GameState.Playing;
         Debug.Log("Game Started!");
+        AudioManager.Instance.PlayMusic(AudioManager.Instance.musicPlaying, loop: true);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.sfxStart);
     }
 
     public void GameOver()
@@ -35,11 +43,12 @@ public class GameManager : MonoBehaviour
 
         CurrentState = GameState.Dead;
         Debug.Log("Game Over!");
+        AudioManager.Instance.PlayMusic(AudioManager.Instance.musicDead, loop: false);
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.sfxCrash);
     }
 
     public void ResetGame()
     {
-        // Optional: reload scene, fade, etc.
         UnityEngine.SceneManagement.SceneManager.LoadScene(
             UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex
         );
